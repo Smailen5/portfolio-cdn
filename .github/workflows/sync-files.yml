@@ -45,7 +45,7 @@ jobs:
 
       - name: Copy full images
         run: |
-          echo "📸 Copiando immagini da screen-capture/full/"
+          echo "📸 Copiando immagini da screen-capture/full-images/"
           cp -r temp-monorepo/screen-capture/full-images/* public/images/full/ 2>/dev/null || echo "⚠️ Nessuna immagine full trovata"
           echo "✅ Immagini da full-images copiate"
 
