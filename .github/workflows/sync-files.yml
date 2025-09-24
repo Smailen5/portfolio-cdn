@@ -150,7 +150,13 @@ jobs:
       - name: Commit and push changes
         if: steps.check-changes.outputs.changes == 'true'
         run: |
-          git add .
+          # Rimuovi temp-monorepo se esiste
+          if [ -d "temp-monorepo" ]; then
+            git rm -r --cached temp-monorepo 2>/dev/null || true
+          fi
+
+          # Aggiungi solo i file che ci servono
+          git add public/
           git commit -m "🔄 Sync files from monorepo - $(date '+%Y-%m-%d %H:%M:%S')"
           git push
 
