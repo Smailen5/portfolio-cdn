@@ -30,11 +30,23 @@ jobs:
 
       - name: Clone monorepo
         run: |
-          MONOREPO_NAME="${{ github.event.client_payload.monorepo || 'Frontend-Mentor-Challenge' }}"
-          echo "Clonando monorepo: $MONOREPO_NAME"
-          git clone https://github.com/${{ github.repository_owner }}/$MONOREPO_NAME.git temp-monorepo
+          # Per trigger manuale, usa il nome fisso della monorepo
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            MONOREPO_NAME="Frontend-Mentor-Challenge"
+            MONOREPO_OWNER="Smailen5"
+            BRANCH="${{ github.event.inputs.monorepo_branch || 'main' }}"
+          else
+            # Per trigger automatico, usa il payload
+            MONOREPO_NAME="${{ github.event.client_payload.monorepo || 'Frontend-Mentor-Challenge' }}"
+            MONOREPO_OWNER="${{ github.repository_owner }}"
+            BRANCH="${{ github.event.client_payload.branch || 'main' }}"
+          fi
+
+          echo "Clonando monorepo: $MONOREPO_OWNER/$MONOREPO_NAME"
+          echo "Branch: $BRANCH"
+          git clone https://github.com/$MONOREPO_OWNER/$MONOREPO_NAME.git temp-monorepo
           cd temp-monorepo
-          git checkout ${{ github.event.inputs.monorepo_branch || github.event.client_payload.branch || 'main' }}
+          git checkout $BRANCH
           echo "✅ Monorepo clonata e checkout completato"
 
       - name: Copy projects.json
