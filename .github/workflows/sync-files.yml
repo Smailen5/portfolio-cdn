@@ -49,27 +49,84 @@ jobs:
           git checkout $BRANCH
           echo "✅ Monorepo clonata e checkout completato"
 
+      - name: Debug monorepo structure
+        run: |
+          echo "📁 Struttura della monorepo:"
+          find temp-monorepo -maxdepth 3 -type d | head -20
+          echo ""
+          echo "📄 File projects.json:"
+          find temp-monorepo -name "projects.json" -type f
+          echo ""
+          echo "📸 Cartelle immagini:"
+          find temp-monorepo -path "*/screen-capture*" -type d
+          echo ""
+          echo "📸 Contenuto screen-capture:"
+          ls -la temp-monorepo/screen-capture/ 2>/dev/null || echo "Cartella screen-capture non trovata"
+
       - name: Copy projects.json
         run: |
           echo "📁 Copiando projects.json da public/"
-          cp temp-monorepo/public/projects.json public/
-          echo "✅ projects.json copiato con successo"
+          echo "🔍 Controllo se il file esiste:"
+          ls -la temp-monorepo/public/ || echo "Cartella public non esiste"
+          echo "🔍 Contenuto della cartella public:"
+          find temp-monorepo/public/ -name "*.json" 2>/dev/null || echo "Nessun file JSON trovato"
+
+          if [ -f "temp-monorepo/public/projects.json" ]; then
+            echo "📄 File trovato, procedo con la copia"
+            cp temp-monorepo/public/projects.json public/
+            echo "✅ projects.json copiato con successo"
+            ls -la public/projects.json
+          else
+            echo "❌ File projects.json non trovato in temp-monorepo/public/"
+            echo "🔍 Struttura completa della monorepo:"
+            find temp-monorepo -name "projects.json" -type f
+            exit 1
+          fi
 
       - name: Copy full images
         run: |
           echo "📸 Copiando immagini da screen-capture/full-images/"
-          cp -r temp-monorepo/screen-capture/full-images/* public/images/full/ 2>/dev/null || echo "⚠️ Nessuna immagine full trovata"
-          echo "✅ Immagini da full-images copiate"
+          if [ -d "temp-monorepo/screen-capture/full-images" ]; then
+            cp -r temp-monorepo/screen-capture/full-images/* public/images/full/ 2>/dev/null || echo "⚠️ Nessuna immagine full trovata"
+            echo "✅ Immagini da full-images copiate"
+            ls -la public/images/full/ | head -5
+          else
+            echo "❌ Cartella full-images non trovata"
+          fi
 
       - name: Copy preview images
         run: |
           echo "📸 Copiando immagini di anteprima da screen-capture/preview/"
-          cp -r temp-monorepo/screen-capture/preview/* public/images/previews/ 2>/dev/null || echo "⚠️ Nessuna immagine di anteprima trovata"
-          echo "✅ Immagini da preview copiate"
+          if [ -d "temp-monorepo/screen-capture/preview" ]; then
+            cp -r temp-monorepo/screen-capture/preview/* public/images/previews/ 2>/dev/null || echo "⚠️ Nessuna immagine di anteprima trovata"
+            echo "✅ Immagini da preview copiate"
+            ls -la public/images/previews/ | head -5
+          else
+            echo "❌ Cartella preview non trovata"
+          fi
 
       - name: Check for changes
         id: check-changes
         run: |
+          echo "🔍 Controllo cambiamenti..."
+          echo "📁 File in public/:"
+          ls -la public/
+          echo ""
+          echo "📸 File in public/images/:"
+          ls -la public/images/
+          echo ""
+          echo "📸 File in public/images/full/:"
+          ls -la public/images/full/ | head -5
+          echo ""
+          echo "📸 File in public/images/previews/:"
+          ls -la public/images/previews/ | head -5
+          echo ""
+          echo "🔍 Git status:"
+          git status
+          echo ""
+          echo "🔍 Git diff:"
+          git diff --name-only
+          echo ""
           if git diff --quiet; then
             echo "changes=false" >> $GITHUB_OUTPUT
             echo "Nessun cambiamento rilevato"
