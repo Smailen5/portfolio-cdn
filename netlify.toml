@@ -1,5 +1,4 @@
 [build]
-  # Non serve build command, serviamo file statici
   publish = "public"
   command = "echo 'No build needed - serving static files'"
 
@@ -28,15 +27,8 @@
     Cache-Control = "public, max-age=3600"
     Content-Type = "application/json"
 
-# Redirect per compatibilità
+# Redirect root a projects.json per CDN
 [[redirects]]
-  from = "/api/*"
-  to = "/404"
-  status = 404
-
-# SPA fallback (se necessario in futuro)
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  conditions = {Role = ["admin"]}
+  from = "/"
+  to = "/projects.json"
+  status = 302
