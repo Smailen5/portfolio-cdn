@@ -87,9 +87,13 @@ jobs:
         run: |
           echo "📸 Copiando immagini da screen-capture/full-images/"
           if [ -d "temp-monorepo/screen-capture/full-images" ]; then
-            cp -r temp-monorepo/screen-capture/full-images/* public/images/full/ 2>/dev/null || echo "⚠️ Nessuna immagine full trovata"
+            # Rimuovi i file esistenti (tranne .gitkeep)
+            find public/images/full/ -name "*.webp" -delete 2>/dev/null || true
+            # Copia tutte le immagini
+            cp temp-monorepo/screen-capture/full-images/*.webp public/images/full/ 2>/dev/null || echo "⚠️ Nessuna immagine full trovata"
             echo "✅ Immagini da full-images copiate"
-            ls -la public/images/full/ | head -5
+            echo "📊 Numero di immagini copiate:"
+            ls public/images/full/*.webp 2>/dev/null | wc -l || echo "0"
           else
             echo "❌ Cartella full-images non trovata"
           fi
@@ -98,9 +102,13 @@ jobs:
         run: |
           echo "📸 Copiando immagini di anteprima da screen-capture/preview/"
           if [ -d "temp-monorepo/screen-capture/preview" ]; then
-            cp -r temp-monorepo/screen-capture/preview/* public/images/previews/ 2>/dev/null || echo "⚠️ Nessuna immagine di anteprima trovata"
+            # Rimuovi i file esistenti (tranne .gitkeep)
+            find public/images/previews/ -name "*.webp" -delete 2>/dev/null || true
+            # Copia tutte le immagini
+            cp temp-monorepo/screen-capture/preview/*.webp public/images/previews/ 2>/dev/null || echo "⚠️ Nessuna immagine di anteprima trovata"
             echo "✅ Immagini da preview copiate"
-            ls -la public/images/previews/ | head -5
+            echo "📊 Numero di immagini copiate:"
+            ls public/images/previews/*.webp 2>/dev/null | wc -l || echo "0"
           else
             echo "❌ Cartella preview non trovata"
           fi
