@@ -2,17 +2,17 @@
 
 Repository dedicata alla distribuzione dei file statici del portfolio tramite CDN Netlify.
 
-- [🎯 Scopo](#scopo)
-- [🏗️ Architettura](#architettura)
-- [🔄 Sincronizzazione Automatica](#sincronizzazione-automatica)
-- [📁 Struttura](#struttura)
-- [📄 File di Configurazione](#file-di-configurazione)
-- [⚙️ Configurazione](#configurazione)
-- [🧪 Test e Utilizzo](#test-e-utilizzo)
-- [📊 Monitoraggio](#monitoraggio)
-- [🔧 Manutenzione](#manutenzione)
-- [🌐 URL del CDN](#url-del-cdn)
-- [📝 Note](#note)
+- [🎯 Scopo](#-scopo)
+- [🏗️ Architettura](#-architettura)
+- [🔄 Sincronizzazione Automatica](#-sincronizzazione-automatica)
+- [📁 Struttura](#-struttura)
+- [📄 File di Configurazione](#-file-di-configurazione)
+- [⚙️ Configurazione](#-configurazione)
+- [🧪 Test e Utilizzo](#-test-e-utilizzo)
+- [📊 Monitoraggio](#-monitoraggio)
+- [🔧 Manutenzione](#-manutenzione)
+- [🌐 URL del CDN](#-url-del-cdn)
+- [📝 Note](#-note)
 
 
 ## 🎯 Scopo
