@@ -135,23 +135,23 @@ La sincronizzazione si attiva automaticamente quando:
 Una volta deployato su Netlify, i file saranno disponibili su:
 
 ```
-https://[nome-sito].netlify.app/projects.json
-https://[nome-sito].netlify.app/images/previews/[nome-progetto].webp
-https://[nome-sito].netlify.app/images/full/[nome-progetto].webp
+https://portfolio-cdn.netlify.app/projects.json || https://portfolio-cdn.netlify.app/
+https://portfolio-cdn.netlify.app/images/previews/[nome-progetto].webp
+https://portfolio-cdn.netlify.app/images/full/[nome-progetto].webp
 ```
 
 ### Esempio di utilizzo nel frontend:
 
 ```javascript
 // Carica i progetti
-const response = await fetch('https://[nome-sito].netlify.app/projects.json');
+const response = await fetch('https://portfolio-cdn.netlify.app/projects.json');
 const projects = await response.json();
 
 // Carica immagine di anteprima
-const imageUrl = `https://[nome-sito].netlify.app/images/previews/${project.name}.webp`;
+const imageUrl = `https://portfolio-cdn.netlify.app/images/previews/${project.name}.webp`;
 
 // Carica immagine full size
-const fullImageUrl = `https://[nome-sito].netlify.app/images/full/${project.name}.webp`;
+const fullImageUrl = `https://portfolio-cdn.netlify.app/images/full/${project.name}.webp`;
 ```
 
 ## 📝 Note
