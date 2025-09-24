@@ -135,7 +135,11 @@ jobs:
           echo "🔍 Git diff:"
           git diff --name-only
           echo ""
-          if git diff --quiet; then
+          echo "🔍 File untracked:"
+          git ls-files --others --exclude-standard
+          echo ""
+          # Controlla se ci sono file untracked o modificati
+          if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
             echo "changes=false" >> $GITHUB_OUTPUT
             echo "Nessun cambiamento rilevato"
           else
