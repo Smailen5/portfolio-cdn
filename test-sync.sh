@@ -19,9 +19,25 @@ cd ..
 
 echo "✅ Monorepo clonata"
 
-echo "📁 Copiando projects.json"
+echo "📁 Copiando e aggiornando projects.json"
 cp temp-monorepo/public/projects.json public/
-echo "✅ projects.json copiato"
+
+# Aggiorna i link delle immagini per usare la CDN
+echo "🔄 Aggiornando imageUrl per CDN..."
+node -e "
+const fs = require('fs');
+const projects = JSON.parse(fs.readFileSync('public/projects.json', 'utf8'));
+
+projects.forEach(project => {
+  const projectName = project.nameFolder || project.name;
+  project.imageUrl = \`https://portfolio-cdn.netlify.app/images/previews/\${projectName}.webp\`;
+});
+
+fs.writeFileSync('public/projects.json', JSON.stringify(projects, null, 2));
+console.log('✅ Link immagini aggiornati per CDN');
+"
+
+echo "✅ projects.json copiato e aggiornato"
 
 echo "📸 Copiando immagini full size"
 mkdir -p public/images/full
