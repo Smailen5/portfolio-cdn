@@ -83,7 +83,6 @@ jobs:
       - name: Commit and push changes
         if: steps.check-changes.outputs.changes == 'true'
         run: |
-          git rm -r --cached temp-monorepo 2>/dev/null || true
           git add public/
           git commit -m "🔄 Sync files from monorepo - $(date '+%Y-%m-%d %H:%M:%S')"
           git push
