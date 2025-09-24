@@ -49,96 +49,29 @@ jobs:
           git checkout $BRANCH
           echo "✅ Monorepo clonata e checkout completato"
 
-      - name: Debug monorepo structure
-        run: |
-          echo "📁 Struttura della monorepo:"
-          find temp-monorepo -maxdepth 3 -type d | head -20
-          echo ""
-          echo "📄 File projects.json:"
-          find temp-monorepo -name "projects.json" -type f
-          echo ""
-          echo "📸 Cartelle immagini:"
-          find temp-monorepo -path "*/screen-capture*" -type d
-          echo ""
-          echo "📸 Contenuto screen-capture:"
-          ls -la temp-monorepo/screen-capture/ 2>/dev/null || echo "Cartella screen-capture non trovata"
-
       - name: Copy projects.json
         run: |
-          echo "📁 Copiando projects.json da public/"
-          echo "🔍 Controllo se il file esiste:"
-          ls -la temp-monorepo/public/ || echo "Cartella public non esiste"
-          echo "🔍 Contenuto della cartella public:"
-          find temp-monorepo/public/ -name "*.json" 2>/dev/null || echo "Nessun file JSON trovato"
-
-          if [ -f "temp-monorepo/public/projects.json" ]; then
-            echo "📄 File trovato, procedo con la copia"
-            cp temp-monorepo/public/projects.json public/
-            echo "✅ projects.json copiato con successo"
-            ls -la public/projects.json
-          else
-            echo "❌ File projects.json non trovato in temp-monorepo/public/"
-            echo "🔍 Struttura completa della monorepo:"
-            find temp-monorepo -name "projects.json" -type f
-            exit 1
-          fi
+          echo "📁 Copiando projects.json..."
+          cp temp-monorepo/public/projects.json public/
+          echo "✅ projects.json copiato"
 
       - name: Copy full images
         run: |
-          echo "📸 Copiando immagini da screen-capture/full-images/"
-          if [ -d "temp-monorepo/screen-capture/full-images" ]; then
-            # Rimuovi i file esistenti (tranne .gitkeep)
-            find public/images/full/ -name "*.webp" -delete 2>/dev/null || true
-            # Copia tutte le immagini
-            cp temp-monorepo/screen-capture/full-images/*.webp public/images/full/ 2>/dev/null || echo "⚠️ Nessuna immagine full trovata"
-            echo "✅ Immagini da full-images copiate"
-            echo "📊 Numero di immagini copiate:"
-            ls public/images/full/*.webp 2>/dev/null | wc -l || echo "0"
-          else
-            echo "❌ Cartella full-images non trovata"
-          fi
+          echo "📸 Copiando immagini full size..."
+          find public/images/full/ -name "*.webp" -delete 2>/dev/null || true
+          cp temp-monorepo/screen-capture/full-images/*.webp public/images/full/ 2>/dev/null || echo "⚠️ Nessuna immagine full"
+          echo "✅ Immagini full copiate"
 
       - name: Copy preview images
         run: |
-          echo "📸 Copiando immagini di anteprima da screen-capture/preview/"
-          if [ -d "temp-monorepo/screen-capture/preview" ]; then
-            # Rimuovi i file esistenti (tranne .gitkeep)
-            find public/images/previews/ -name "*.webp" -delete 2>/dev/null || true
-            # Copia tutte le immagini
-            cp temp-monorepo/screen-capture/preview/*.webp public/images/previews/ 2>/dev/null || echo "⚠️ Nessuna immagine di anteprima trovata"
-            echo "✅ Immagini da preview copiate"
-            echo "📊 Numero di immagini copiate:"
-            ls public/images/previews/*.webp 2>/dev/null | wc -l || echo "0"
-          else
-            echo "❌ Cartella preview non trovata"
-          fi
+          echo "📸 Copiando immagini preview..."
+          find public/images/previews/ -name "*.webp" -delete 2>/dev/null || true
+          cp temp-monorepo/screen-capture/preview/*.webp public/images/previews/ 2>/dev/null || echo "⚠️ Nessuna immagine preview"
+          echo "✅ Immagini preview copiate"
 
       - name: Check for changes
         id: check-changes
         run: |
-          echo "🔍 Controllo cambiamenti..."
-          echo "📁 File in public/:"
-          ls -la public/
-          echo ""
-          echo "📸 File in public/images/:"
-          ls -la public/images/
-          echo ""
-          echo "📸 File in public/images/full/:"
-          ls -la public/images/full/ | head -5
-          echo ""
-          echo "📸 File in public/images/previews/:"
-          ls -la public/images/previews/ | head -5
-          echo ""
-          echo "🔍 Git status:"
-          git status
-          echo ""
-          echo "🔍 Git diff:"
-          git diff --name-only
-          echo ""
-          echo "🔍 File untracked:"
-          git ls-files --others --exclude-standard
-          echo ""
-          # Controlla se ci sono file untracked o modificati
           if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
             echo "changes=false" >> $GITHUB_OUTPUT
             echo "Nessun cambiamento rilevato"
@@ -150,12 +83,7 @@ jobs:
       - name: Commit and push changes
         if: steps.check-changes.outputs.changes == 'true'
         run: |
-          # Rimuovi temp-monorepo se esiste
-          if [ -d "temp-monorepo" ]; then
-            git rm -r --cached temp-monorepo 2>/dev/null || true
-          fi
-
-          # Aggiungi solo i file che ci servono
+          git rm -r --cached temp-monorepo 2>/dev/null || true
           git add public/
           git commit -m "🔄 Sync files from monorepo - $(date '+%Y-%m-%d %H:%M:%S')"
           git push
@@ -164,10 +92,3 @@ jobs:
         if: always()
         run: |
           rm -rf temp-monorepo
-
-      - name: Notify success
-        if: steps.check-changes.outputs.changes == 'true'
-        run: |
-          echo "✅ File sincronizzati con successo!"
-          echo "📁 projects.json aggiornato"
-          echo "🖼️ Immagini di anteprima aggiornate"
