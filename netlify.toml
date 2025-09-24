@@ -1,6 +1,6 @@
 [build]
   # Non serve build command, serviamo file statici
-  publish = "public"
+  publish = "."
   command = "echo 'No build needed - serving static files'"
 
 [build.environment]
@@ -33,6 +33,12 @@
   from = "/api/*"
   to = "/404"
   status = 404
+
+# Redirect root a projects.json per CDN
+[[redirects]]
+  from = "/"
+  to = "/projects.json"
+  status = 302
 
 # SPA fallback (se necessario in futuro)
 [[redirects]]
