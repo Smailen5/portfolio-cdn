@@ -1,0 +1,86 @@
+name: Sync Files from Monorepo
+
+on:
+  # Trigger quando c'è un push sul main della monorepo
+  repository_dispatch:
+    types: [monorepo-updated]
+
+  # Trigger manuale per test
+  workflow_dispatch:
+    inputs:
+      monorepo_branch:
+        description: 'Branch della monorepo da sincronizzare'
+        required: true
+        default: 'main'
+
+jobs:
+  sync-files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout CDN repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Clone monorepo
+        run: |
+          MONOREPO_NAME="${{ github.event.client_payload.monorepo || 'Frontend-Mentor-Challenge' }}"
+          echo "Clonando monorepo: $MONOREPO_NAME"
+          git clone https://github.com/${{ github.repository_owner }}/$MONOREPO_NAME.git temp-monorepo
+          cd temp-monorepo
+          git checkout ${{ github.event.inputs.monorepo_branch || github.event.client_payload.branch || 'main' }}
+          echo "✅ Monorepo clonata e checkout completato"
+
+      - name: Copy projects.json
+        run: |
+          echo "📁 Copiando projects.json da public/"
+          cp temp-monorepo/public/projects.json public/
+          echo "✅ projects.json copiato con successo"
+
+      - name: Copy full images
+        run: |
+          echo "📸 Copiando immagini da screen-capture/full/"
+          cp -r temp-monorepo/screen-capture/full-images/* public/images/full/ 2>/dev/null || echo "⚠️ Nessuna immagine full trovata"
+          echo "✅ Immagini da full-images copiate"
+
+      - name: Copy preview images
+        run: |
+          echo "📸 Copiando immagini di anteprima da screen-capture/preview/"
+          cp -r temp-monorepo/screen-capture/preview/* public/images/previews/ 2>/dev/null || echo "⚠️ Nessuna immagine di anteprima trovata"
+          echo "✅ Immagini da preview copiate"
+
+      - name: Check for changes
+        id: check-changes
+        run: |
+          if git diff --quiet; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "Nessun cambiamento rilevato"
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "Cambiamenti rilevati, procedo con il commit"
+          fi
+
+      - name: Commit and push changes
+        if: steps.check-changes.outputs.changes == 'true'
+        run: |
+          git add .
+          git commit -m "🔄 Sync files from monorepo - $(date '+%Y-%m-%d %H:%M:%S')"
+          git push
+
+      - name: Cleanup
+        if: always()
+        run: |
+          rm -rf temp-monorepo
+
+      - name: Notify success
+        if: steps.check-changes.outputs.changes == 'true'
+        run: |
+          echo "✅ File sincronizzati con successo!"
+          echo "📁 projects.json aggiornato"
+          echo "🖼️ Immagini di anteprima aggiornate"
