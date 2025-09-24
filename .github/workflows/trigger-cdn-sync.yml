@@ -1,0 +1,29 @@
+name: Trigger CDN Sync
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/projects.json'
+      - '**/screen-capture/**'
+
+jobs:
+  trigger-cdn-sync:
+    runs-on: ubuntu-latest
+
+    # Step da aggiungere alla monorepo che eseguira il trigger (aggiorna nome triggered_by)
+    steps:
+      - name: Trigger CDN repository sync
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.CDN_REPO_TOKEN }}
+          repository: ${{ github.repository_owner }}/portfolio-cdn
+          event-type: monorepo-updated
+          client-payload: |
+            {
+              "monorepo": "${{ github.repository }}",
+              "commit": "${{ github.sha }}",
+              "branch": "${{ github.ref_name }}",
+              "author": "${{ github.actor }}",
+              "triggered_by": "nome-del-trigger-workflow"
+            }
