@@ -32,3 +32,9 @@
   from = "/"
   to = "/projects.json"
   status = 302
+
+# Redirect per le immagini (serve file statici)
+[[redirects]]
+  from = "/images/*"
+  to = "/images/:splat"
+  status = 200
