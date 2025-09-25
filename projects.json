@@ -29,7 +29,7 @@
     "createdAt": "2024-01-29T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/ecommerce-product-page.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/ecommerce-product-page/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "news-homepage",
@@ -45,7 +45,7 @@
     "createdAt": "2024-01-28T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/news-homepage.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/news-homepage/README.md",
-    "_v": "0.1.10"
+    "_v": "0.1.11"
   },
   {
     "name": "contact-form",
@@ -61,7 +61,7 @@
     "createdAt": "2024-01-27T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/contact-form.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/contact-form/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "faq-accordion",
@@ -77,7 +77,7 @@
     "createdAt": "2024-01-26T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/faq-accordion.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/faq-accordion/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "frontend-quiz-app",
@@ -93,7 +93,7 @@
     "createdAt": "2024-01-25T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/frontend-quiz-app.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/frontend-quiz-app/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "skilled-elearning-landing-page",
@@ -109,7 +109,7 @@
     "createdAt": "2024-01-24T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/skilled-elearning-landing-page.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/skilled-elearning-landing-page/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "base-apparel-coming",
@@ -127,7 +127,7 @@
     "createdAt": "2024-01-23T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/base-apparel-coming.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/base-apparel-coming/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "single-page-developer-portfolio",
@@ -143,7 +143,7 @@
     "createdAt": "2024-01-22T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/single-page-developer-portfolio.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/single-page-developer-portfolio/README.md",
-    "_v": "1.0.1"
+    "_v": "1.0.2"
   },
   {
     "name": "component-with-signup-form",
@@ -159,7 +159,7 @@
     "createdAt": "2024-01-21T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/component-with-signup-form.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/component-with-signup-form/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "password-generator-app",
@@ -174,7 +174,7 @@
     "createdAt": "2024-01-20T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/password-generator-app.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/password-generator-app/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "tip-calculator-app",
@@ -190,7 +190,7 @@
     "createdAt": "2024-01-19T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/tip-calculator-app-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/tip-calculator-app-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "time-tracking-dashboard",
@@ -205,7 +205,7 @@
     "createdAt": "2024-01-18T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/time-tracking-dashboard-main-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/time-tracking-dashboard-main-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "qr-code-component",
@@ -220,7 +220,7 @@
     "createdAt": "2024-01-17T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/qr-code-component-main-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/qr-code-component-main-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "3-column-preview-card-component",
@@ -236,7 +236,7 @@
     "createdAt": "2024-01-16T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/3-column-preview-card-component-main-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/3-column-preview-card-component-main-main/README.md",
-    "_v": "1.1.0"
+    "_v": "1.1.2"
   },
   {
     "name": "article-preview-component",
@@ -253,7 +253,7 @@
     "createdAt": "2024-01-15T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/article-preview-component-master-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/article-preview-component-master-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "blog-preview-card",
@@ -269,7 +269,7 @@
     "createdAt": "2024-01-14T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/blog-preview-card-main-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/blog-preview-card-main-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "four-card-feature-section",
@@ -285,7 +285,7 @@
     "createdAt": "2024-01-13T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/four-card-feature-section-master-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/four-card-feature-section-master-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "interactive-rating-component",
@@ -301,7 +301,7 @@
     "createdAt": "2024-01-12T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/interactive-rating-component-main-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/interactive-rating-component-main-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "meet-landing-page",
@@ -317,7 +317,7 @@
     "createdAt": "2024-01-11T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/meet-landing-page-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/meet-landing-page-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "newsletter-sign-up",
@@ -333,7 +333,7 @@
     "createdAt": "2024-01-10T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/newsletter-sign-up-with-success-message-main-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/newsletter-sign-up-with-success-message-main-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "nft-preview-card-component",
@@ -349,7 +349,7 @@
     "createdAt": "2024-01-09T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/nft-preview-card-component-main-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/nft-preview-card-component-main-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "order-summary-component",
@@ -365,7 +365,7 @@
     "createdAt": "2024-01-08T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/order-summary-component-main-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/order-summary-component-main-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "pod-request-access-landing-page",
@@ -381,7 +381,7 @@
     "createdAt": "2024-01-07T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/pod-request-access-landing-page-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/pod-request-access-landing-page-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "recipe-page",
@@ -397,7 +397,7 @@
     "createdAt": "2024-01-06T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/recipe-page-main-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/recipe-page-main-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "results-summary-component",
@@ -413,7 +413,7 @@
     "createdAt": "2024-01-05T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/results-summary-component-main-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/results-summary-component-main-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "social-links-profile",
@@ -429,7 +429,7 @@
     "createdAt": "2024-01-04T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/social-links-profile-main-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/social-links-profile-main-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "social-proof-section",
@@ -445,7 +445,7 @@
     "createdAt": "2024-01-03T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/social-proof-section-master-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/social-proof-section-master-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "stats-preview-card-component",
@@ -461,7 +461,7 @@
     "createdAt": "2024-01-03T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/stats-preview-card-component-main-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/stats-preview-card-component-main-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "testimonials-grid-section",
@@ -477,7 +477,7 @@
     "createdAt": "2024-01-02T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/testimonials-grid-section-main-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/testimonials-grid-section-main-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "product-preview-card",
@@ -493,7 +493,7 @@
     "createdAt": "2024-01-01T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/product-preview-card-component-main-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/product-preview-card-component-main-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   },
   {
     "name": "profile-card-component",
@@ -509,6 +509,6 @@
     "createdAt": "2024-01-01T00:00:00.000Z",
     "imageUrl": "https://portfolio-cdn.netlify.app/images/previews/profile-card-component-main-main.webp",
     "readmeUrl": "https://raw.githubusercontent.com/Smailen5/Frontend-Mentor-Challenge/refs/heads/main/packages/profile-card-component-main-main/README.md",
-    "_v": "1.0.0"
+    "_v": "1.0.1"
   }
 ]
