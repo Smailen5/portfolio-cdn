@@ -53,7 +53,6 @@ jobs:
         run: |
           echo "📁 Creando struttura cartelle..."
           mkdir -p public
-          mkdir -p public/images
           mkdir -p public/images/previews
           mkdir -p public/images/full
           mkdir -p public/images/screenshots
@@ -88,14 +87,14 @@ jobs:
         run: |
           echo "📸 Copiando immagini full size..."
           find public/images/full/ -name "*.webp" -delete 2>/dev/null || true
-          cp temp-monorepo/screen-capture/full/*.webp public/images/full/ 2>/dev/null || echo "⚠️ Nessuna immagine full"
+          cp temp-monorepo/screen-capture/full-images/*.webp public/images/full/ 2>/dev/null || echo "⚠️ Nessuna immagine full"
           echo "✅ Immagini full copiate"
 
       - name: Copy preview images
         run: |
           echo "📸 Copiando immagini preview..."
           find public/images/previews/ -name "*.webp" -delete 2>/dev/null || true
-          cp temp-monorepo/screen-capture/previews/*.webp public/images/previews/ 2>/dev/null || echo "⚠️ Nessuna immagine preview"
+          cp temp-monorepo/screen-capture/preview/*.webp public/images/previews/ 2>/dev/null || echo "⚠️ Nessuna immagine preview"
           echo "✅ Immagini preview copiate"
 
       - name: Copy screenshots
