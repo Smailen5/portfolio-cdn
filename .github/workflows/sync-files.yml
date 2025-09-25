@@ -88,6 +88,15 @@ jobs:
           cp temp-monorepo/screen-capture/previews/*.webp images/previews/ 2>/dev/null || echo "⚠️ Nessuna immagine preview"
           echo "✅ Immagini preview copiate"
 
+      - name: Copy screenshots
+        run: |
+          echo "📸 Copiando immagini screenshot..."
+          # Crea cartella se non esiste
+          mkdir -p images/screenshots
+          # Copia ricorsivamente tutta la cartella screenshots
+          cp -r temp-monorepo/screen-capture/screenshots/* images/screenshots/ 2>/dev/null || echo "⚠️ Nessuna immagine screenshot"
+          echo "✅ Immagini screenshot copiate"
+
       - name: Check for changes
         id: check-changes
         run: |
