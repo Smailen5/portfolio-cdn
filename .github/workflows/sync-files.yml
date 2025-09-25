@@ -53,6 +53,7 @@ jobs:
         run: |
           echo "📁 Creando struttura cartelle..."
           mkdir -p public
+          mkdir -p public/images
           mkdir -p public/images/previews
           mkdir -p public/images/full
           mkdir -p public/images/screenshots
