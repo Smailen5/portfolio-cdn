@@ -62,7 +62,6 @@ jobs:
 
             projects.forEach(project => {
               // Estrai il nome del progetto dal path GitHub
-              const githubUrl = project.imageUrl;
               const projectName = project.nameFolder;
 
               // Aggiorna con il link della CDN
