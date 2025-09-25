@@ -33,7 +33,7 @@ jobs:
           # Per trigger manuale, usa il nome fisso della monorepo
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             MONOREPO_NAME="Frontend-Mentor-Challenge"
-            MONOREPO_OWNER="Smailen5"
+            MONOREPO_OWNER="${{ github.repository_owner }}"
             BRANCH="${{ github.event.inputs.monorepo_branch || 'main' }}"
           else
             # Per trigger automatico, usa il payload
@@ -63,7 +63,7 @@ jobs:
             projects.forEach(project => {
               // Estrai il nome del progetto dal path GitHub
               const githubUrl = project.imageUrl;
-              const projectName = project.nameFolder || project.name;
+              const projectName = project.nameFolder;
 
               // Aggiorna con il link della CDN
               project.imageUrl = \`https://portfolio-cdn.netlify.app/images/previews/\${projectName}.webp\`;
