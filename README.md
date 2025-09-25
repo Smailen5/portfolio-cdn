@@ -61,7 +61,7 @@ test-sync.sh              # Script di test locale
 
 Per far funzionare la sincronizzazione, devi configurare:
 
-1. **Nella monorepo**: Aggiungi lo step "Trigger CDN Sync" al workflow esistente (vedi esempio in `trigger-cdn-sync.yml`)
+1. **Nella monorepo**: Aggiungi lo step "Trigger CDN Sync" al workflow esistente (vedi esempio in `trigger-cdn-sync.example.yml`)
 2. **In questa repo**: Il workflow `sync-files.yml` è già configurato (aggiornalo se hai bisogno di recuperare nuovi file)
 3. **Token**: Crea un Personal Access Token con permessi di repository e aggiungilo come `CDN_REPO_TOKEN` nella monorepo (ne esiste gia uno, rigeneralo se necessario, aggiorna tutte le monorepo che lo utilizzano)
 
