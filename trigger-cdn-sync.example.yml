@@ -11,13 +11,15 @@ jobs:
   trigger-cdn-sync:
     runs-on: ubuntu-latest
 
-    # Step da aggiungere alla monorepo che eseguira il trigger (aggiorna nome triggered_by)
     steps:
       - name: Trigger CDN repository sync
         uses: peter-evans/repository-dispatch@v2
         with:
+          # Ricorda che la repo che fara richiesta di trigger deve avere questo token
           token: ${{ secrets.CDN_REPO_TOKEN }}
+          # Repository che andra a triggerare
           repository: ${{ github.repository_owner }}/portfolio-cdn
+          # Evento che avvia il workflow
           event-type: monorepo-updated
           client-payload: |
             {
@@ -25,5 +27,5 @@ jobs:
               "commit": "${{ github.sha }}",
               "branch": "${{ github.ref_name }}",
               "author": "${{ github.actor }}",
-              "triggered_by": "nome-del-trigger-workflow"
+              "triggered_by": "${{ github.repository }}"
             }
