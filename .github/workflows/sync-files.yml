@@ -49,16 +49,23 @@ jobs:
           git checkout $BRANCH
           echo "✅ Monorepo clonata e checkout completato"
 
+      - name: Create public folder
+        run: |
+          mkdir -p public
+          mkdir -p public/images/previews
+          mkdir -p public/images/full
+          mkdir -p public/images/screenshots
+
       - name: Copy and update projects.json
         run: |
           echo "📁 Copiando e aggiornando projects.json..."
-          cp temp-monorepo/public/projects.json .
+          cp temp-monorepo/public/projects.json public/
 
           # Aggiorna i link delle immagini per usare la CDN
           echo "🔄 Aggiornando imageUrl per CDN..."
           node -e "
             const fs = require('fs');
-            const projects = JSON.parse(fs.readFileSync('projects.json', 'utf8'));
+            const projects = JSON.parse(fs.readFileSync('public/projects.json', 'utf8'));
 
             projects.forEach(project => {
               // Estrai il nome del progetto dal path GitHub
@@ -68,7 +75,7 @@ jobs:
               project.imageUrl = \`https://portfolio-cdn.netlify.app/images/previews/\${projectName}.webp\`;
             });
 
-            fs.writeFileSync('projects.json', JSON.stringify(projects, null, 2));
+            fs.writeFileSync('public/projects.json', JSON.stringify(projects, null, 2));
             console.log('✅ Link immagini aggiornati per CDN');
           "
 
@@ -77,24 +84,22 @@ jobs:
       - name: Copy full images
         run: |
           echo "📸 Copiando immagini full size..."
-          find images/full/ -name "*.webp" -delete 2>/dev/null || true
-          cp temp-monorepo/screen-capture/full/*.webp images/full/ 2>/dev/null || echo "⚠️ Nessuna immagine full"
+          find public/images/full/ -name "*.webp" -delete 2>/dev/null || true
+          cp temp-monorepo/screen-capture/full/*.webp public/images/full/ 2>/dev/null || echo "⚠️ Nessuna immagine full"
           echo "✅ Immagini full copiate"
 
       - name: Copy preview images
         run: |
           echo "📸 Copiando immagini preview..."
-          find images/previews/ -name "*.webp" -delete 2>/dev/null || true
-          cp temp-monorepo/screen-capture/previews/*.webp images/previews/ 2>/dev/null || echo "⚠️ Nessuna immagine preview"
+          find public/images/previews/ -name "*.webp" -delete 2>/dev/null || true
+          cp temp-monorepo/screen-capture/previews/*.webp public/images/previews/ 2>/dev/null || echo "⚠️ Nessuna immagine preview"
           echo "✅ Immagini preview copiate"
 
       - name: Copy screenshots
         run: |
           echo "📸 Copiando immagini screenshot..."
-          # Crea cartella se non esiste
-          mkdir -p images/screenshots
           # Copia ricorsivamente tutta la cartella screenshots
-          cp -r temp-monorepo/screen-capture/screenshots/* images/screenshots/ 2>/dev/null || echo "⚠️ Nessuna immagine screenshot"
+          cp -r temp-monorepo/screen-capture/screenshots/* public/images/screenshots/ 2>/dev/null || echo "⚠️ Nessuna immagine screenshot"
           echo "✅ Immagini screenshot copiate"
 
       - name: Check for changes
@@ -111,8 +116,8 @@ jobs:
       - name: Commit and push changes
         if: steps.check-changes.outputs.changes == 'true'
         run: |
-          git add projects.json
-          git add images/
+          git add public/projects.json
+          git add public/images/
           git commit -m "🔄 Sync files from monorepo - $(date '+%Y-%m-%d %H:%M:%S')"
           git push
 
