@@ -51,10 +51,12 @@ jobs:
 
       - name: Create public folder
         run: |
+          echo "📁 Creando struttura cartelle..."
           mkdir -p public
           mkdir -p public/images/previews
           mkdir -p public/images/full
           mkdir -p public/images/screenshots
+          echo "✅ Struttura cartelle creata"
 
       - name: Copy and update projects.json
         run: |
