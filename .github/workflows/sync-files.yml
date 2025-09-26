@@ -30,6 +30,7 @@ jobs:
 
       - name: Clone monorepo
         run: |
+          chmod +x scripts/*.sh
           export GITHUB_EVENT_NAME="${{ github.event_name }}"
           export MONOREPO_NAME="${{ github.event.client_payload.monorepo }}"
           export MONOREPO_OWNER="${{ github.event.client_payload.owner }}"
