@@ -4,11 +4,12 @@ Repository dedicata alla distribuzione dei file statici del portfolio tramite CD
 
 ## 🎯 Scopo
 
-Questa repository serve come CDN per:
+Questa repository serve come CDN per [smailenvargas.com](https://smailenvargas.com):
 
 - `projects.json` - Dettagli di tutti i progetti con metadati completi
 - Immagini di anteprima (`previews/`) - Screenshot ridimensionati per le card
 - Immagini full size (`full/`) - Screenshot ad alta risoluzione per i dettagli
+- Immagini screenshot (`screenshots/`) - Screenshot per i file readme
 
 ## 🏗️ Architettura
 
@@ -19,7 +20,7 @@ Portfolio CDN (Questa repo)
     ↓ (Netlify Deploy)
 CDN Globale (Netlify)
     ↓ (HTTP/HTTPS)
-Applicazioni Frontend
+smailenvargas.com
 ```
 
 ## 🔄 Sincronizzazione Automatica
@@ -33,26 +34,42 @@ I file vengono sincronizzati automaticamente dalla monorepo principale tramite G
 
 ```
 public/
-├── projects.json          # Dettagli progetti con metadati
+├── projects.json                # Dettagli progetti con metadati
 └── images/
-    ├── full/              # Immagini ad alta risoluzione
-    │   ├── .gitkeep       # Mantiene la cartella su Git
-    │   └── *.webp         # Screenshot full size
-    └── previews/          # Immagini di anteprima
-        ├── .gitkeep       # Mantiene la cartella su Git
-        └── *.webp         # Screenshot ridimensionati
+    ├── full/                    # Immagini ad alta risoluzione
+    │   └── *.webp               # Screenshot full size
+    ├── previews/                # Immagini di anteprima
+    │   └── *.webp               # Screenshot ridimensionati
+    └── screenshots/             # Immagini screenshot
+        └── progetto-1/
+            ├── desktop.jpeg     # Screenshot per il file readme
+            └── smartphone.jpeg  # Screenshot per il file readme
 ```
 
 ### File di Configurazione
 
 ```
 .github/workflows/
-├── sync-files.yml         # Workflow principale di sincronizzazione
-└── trigger-cdn-sync.yml   # Workflow per triggerare la sincronizzazione
+└── sync-files.yml               # Workflow principale di sincronizzazione
 
-netlify.toml               # Configurazione Netlify
-.gitignore                 # Esclude file temporanei
-test-sync.sh              # Script di test locale
+scripts/
+├── check-changes.sh             # Script per controllare i cambiamenti
+├── clone-monorepo.sh            # Script per clonare la monorepo
+├── commit-push.sh               # Script per commitare e pushare i cambiamenti
+├── copy-full-images.sh          # Script per copiare le immagini full size
+├── copy-previews.sh             # Script per copiare le immagini di anteprima
+├── copy-projects.sh             # Script per copiare il file projects.json
+├── copy-screenshots.sh          # Script per copiare le immagini screenshot
+├── create-folder.sh             # Script per creare la struttura delle cartelle
+├── test-sync.sh                 # Script per testare la sincronizzazione
+└── update-projects.sh           # Script per aggiornare il file projects.json
+
+example/
+└── trigger-cdn-sync.example.yml # Esempio di trigger per la sincronizzazione
+
+netlify.toml                     # Configurazione Netlify
+.gitignore                       # Esclude file temporanei
+README.md                        # Documentazione
 ```
 
 ## ⚙️ Configurazione
@@ -61,16 +78,9 @@ test-sync.sh              # Script di test locale
 
 Per far funzionare la sincronizzazione, devi configurare:
 
-1. **Nella monorepo**: Aggiungi lo step "Trigger CDN Sync" al workflow esistente (vedi esempio in `trigger-cdn-sync.example.yml`)
-2. **In questa repo**: Il workflow `sync-files.yml` è già configurato (aggiornalo se hai bisogno di recuperare nuovi file)
-3. **Token**: Crea un Personal Access Token con permessi di repository e aggiungilo come `CDN_REPO_TOKEN` nella monorepo (ne esiste gia uno, rigeneralo se necessario, aggiorna tutte le monorepo che lo utilizzano)
-
-#### Configurazione Token
-
-1. Vai su GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)
-2. Crea un nuovo token con scope `repo`
-3. Nella monorepo, vai su Settings → Secrets and variables → Actions
-4. Aggiungi: `CDN_REPO_TOKEN` = [il tuo token]
+1. **Nella monorepo**: Aggiungi lo step "Trigger CDN Sync" al workflow esistente (vedi esempio in `example/trigger-cdn-sync.example.yml`)
+2. **Nella monorepo**: Aggiungi il token `CDN_REPO_TOKEN`, se lo rigeneri ricorda di aggiornarlo anche nelle altre monorepo che lo utilizzano
+3. **In questa repo**: Il workflow `sync-files.yml` è già configurato (aggiornalo se hai bisogno di recuperare nuovi file)
 
 ### Netlify
 
@@ -89,7 +99,7 @@ Per testare la sincronizzazione senza fare push su GitHub:
 
 ```bash
 # Esegui il test
-./test-sync.sh
+./scripts/test-sync.sh
 ```
 
 Lo script:
@@ -99,28 +109,13 @@ Lo script:
 3. Pulisce i file temporanei
 4. Mostra il risultato
 
-### Test su GitHub Actions
-
-Per testare manualmente la sincronizzazione:
-
-1. Vai su **Actions** → **"Sync Files from Monorepo"**
-2. Clicca **"Run workflow"**
-3. Seleziona il branch della monorepo da sincronizzare
-4. Clicca **"Run workflow"**
-
 ### Trigger Automatico
 
 La sincronizzazione si attiva automaticamente quando:
 
-- Viene fatto push su `main` della monorepo
+- Viene fatto push su `main` della monorepo (Frontend-Mentor-Challenge)
 - Vengono modificati file in `**/projects.json`
 - Vengono modificate immagini in `**/screen-capture/**`
-
-## 📊 Monitoraggio
-
-- **GitHub Actions**: Monitora i workflow per errori
-- **Netlify**: Dashboard per performance e deploy
-- **CDN**: Cache hit rate e latenza
 
 ## 🔧 Manutenzione
 
@@ -138,6 +133,7 @@ Una volta deployato su Netlify, i file saranno disponibili su:
 https://portfolio-cdn.netlify.app/projects.json || https://portfolio-cdn.netlify.app/
 https://portfolio-cdn.netlify.app/images/previews/[nome-progetto].webp
 https://portfolio-cdn.netlify.app/images/full/[nome-progetto].webp
+https://portfolio-cdn.netlify.app/images/screenshots/[nome-progetto]/desktop.jpeg
 ```
 
 ### Esempio di utilizzo nel frontend:
