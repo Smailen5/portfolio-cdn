@@ -32,9 +32,9 @@ jobs:
         run: |
           chmod +x scripts/*.sh
           export GITHUB_EVENT_NAME="${{ github.event_name }}"
-          export MONOREPO_NAME="${{ github.event.client_payload.monorepo }} || Frontend-Mentor-Challenge"
-          export MONOREPO_OWNER="${{ github.event.client_payload.owner }} || Smailen5"
-          export BRANCH="${{ github.event.client_payload.branch }} || main"
+          export MONOREPO_NAME="${{ github.event.client_payload.monorepo || 'Frontend-Mentor-Challenge' }}"
+          export MONOREPO_OWNER="${{ github.event.client_payload.owner || 'Smailen5' }}"
+          export BRANCH="${{ github.event.client_payload.branch || 'main' }}"
           ./scripts/clone-monorepo.sh
 
       - name: Create public folder
