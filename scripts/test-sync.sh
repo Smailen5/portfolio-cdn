@@ -5,13 +5,15 @@ echo "========================================"
 
 # Configurazione
 MONOREPO_NAME="Frontend-Mentor-Challenge"
-MONOREPO_OWNER="Smailen5"  # Il tuo username GitHub
+MONOREPO_OWNER="Smailen5"
 
 echo "📁 Clonando monorepo: $MONOREPO_NAME"
+# Pulisce la cartella temporanea se esiste
 if [ -d "temp-monorepo" ]; then
     rm -rf temp-monorepo
 fi
 
+# Clona la monorepo
 git clone https://github.com/$MONOREPO_OWNER/$MONOREPO_NAME.git temp-monorepo
 cd temp-monorepo
 git checkout main
@@ -19,7 +21,8 @@ cd ..
 
 echo "✅ Monorepo clonata"
 
-echo "📁 Copiando e aggiornando projects.json"
+# Copia il file projects.json
+echo "📁 Copiando projects.json"
 cp temp-monorepo/public/projects.json public/
 
 # Aggiorna i link delle immagini per usare la CDN
@@ -29,7 +32,7 @@ const fs = require('fs');
 const projects = JSON.parse(fs.readFileSync('public/projects.json', 'utf8'));
 
 projects.forEach(project => {
-  const projectName = project.nameFolder || project.name;
+  const projectName = project.nameFolder;
   project.imageUrl = \`https://portfolio-cdn.netlify.app/images/previews/\${projectName}.webp\`;
 });
 
