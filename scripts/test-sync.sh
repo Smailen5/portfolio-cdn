@@ -21,8 +21,26 @@ cd ..
 
 echo "✅ Monorepo clonata"
 
+# Pulisce la cartella public
+if [ -d "public" ]; then
+  echo "🧹 Pulizia della cartella public..."
+  rm -rf public
+else
+  echo "📁 Creando cartella public..."
+  mkdir -p public
+fi
+
+echo "✅ Cartella public pulita o creata"
+
+# Crea la struttura delle cartelle
+echo "📁 Creando struttura delle cartelle..."
+mkdir -p public/images/previews
+mkdir -p public/images/full
+mkdir -p public/images/screenshots
+echo "✅ Struttura delle cartelle creata"
+
 # Copia il file projects.json
-echo "📁 Copiando projects.json"
+echo "📁 Copiando projects.json..."
 cp temp-monorepo/public/projects.json public/
 
 # Aggiorna i link delle immagini per usare la CDN
@@ -42,22 +60,20 @@ console.log('✅ Link immagini aggiornati per CDN');
 
 echo "✅ projects.json copiato e aggiornato"
 
-echo "📸 Copiando immagini full size"
-mkdir -p public/images/full
+echo "📸 Copiando immagini full size..."
 cp -r temp-monorepo/screen-capture/full-images/* public/images/full/ 2>/dev/null || echo "⚠️ Nessuna immagine full trovata"
 echo "✅ Immagini full copiate"
 
 echo "📸 Copiando immagini di anteprima"
-mkdir -p public/images/previews
 cp -r temp-monorepo/screen-capture/preview/* public/images/previews/ 2>/dev/null || echo "⚠️ Nessuna immagine di anteprima trovata"
-echo "✅ Immagini preview copiate"
+echo "✅ Immagini di anteprima copiate"
 
-echo "📸 Copiando immagini screenshot"
-mkdir -p public/images/screenshots
+echo "📸 Copiando immagini screenshot..."
+
 cp -r temp-monorepo/screen-capture/screenshots/* public/images/screenshots/ 2>/dev/null || echo "⚠️ Nessun screenshot trovato"
 echo "✅ Immagini screenshot copiate"
 
-echo "🧹 Pulizia"
+echo "🧹 Pulizia..."
 rm -rf temp-monorepo
 
 echo "✅ Test completato!"
