@@ -52,6 +52,11 @@ mkdir -p public/images/previews
 cp -r temp-monorepo/screen-capture/preview/* public/images/previews/ 2>/dev/null || echo "⚠️ Nessuna immagine di anteprima trovata"
 echo "✅ Immagini preview copiate"
 
+echo "📸 Copiando immagini screenshot"
+mkdir -p public/images/screenshots
+cp -r temp-monorepo/screen-capture/screenshots/* public/images/screenshots/ 2>/dev/null || echo "⚠️ Nessun screenshot trovato"
+echo "✅ Immagini screenshot copiate"
+
 echo "🧹 Pulizia"
 rm -rf temp-monorepo
 
