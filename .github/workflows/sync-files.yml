@@ -56,6 +56,7 @@ jobs:
           mkdir -p public/images/previews
           mkdir -p public/images/full
           mkdir -p public/images/screenshots
+          rm -rf public/full public/previews images
           echo "✅ Struttura cartelle creata"
 
       - name: Copy and update projects.json
