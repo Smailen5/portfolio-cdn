@@ -30,98 +30,37 @@ jobs:
 
       - name: Clone monorepo
         run: |
-          # Per trigger manuale, usa il nome fisso della monorepo
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            MONOREPO_NAME="Frontend-Mentor-Challenge"
-            MONOREPO_OWNER="${{ github.repository_owner }}"
-            BRANCH="${{ github.event.inputs.monorepo_branch || 'main' }}"
-          else
-            # Per trigger automatico, usa il payload
-            MONOREPO_NAME="${{ github.event.client_payload.monorepo || 'Frontend-Mentor-Challenge' }}"
-            MONOREPO_OWNER="${{ github.repository_owner }}"
-            BRANCH="${{ github.event.client_payload.branch || 'main' }}"
-          fi
-
-          echo "Clonando monorepo: $MONOREPO_OWNER/$MONOREPO_NAME"
-          echo "Branch: $BRANCH"
-          git clone https://github.com/$MONOREPO_OWNER/$MONOREPO_NAME.git temp-monorepo
-          cd temp-monorepo
-          git checkout $BRANCH
-          echo "✅ Monorepo clonata e checkout completato"
+          export GITHUB_EVENT_NAME="${{ github.event_name }}"
+          export MONOREPO_NAME="${{ github.event.client_payload.monorepo }}"
+          export MONOREPO_OWNER="${{ github.event.client_payload.owner }}"
+          export BRANCH="${{ github.event.client_payload.branch }}"
+          ./scripts/clone-monorepo.sh
 
       - name: Create public folder
-        run: |
-          echo "📁 Creando struttura cartelle..."
-          mkdir -p public
-          mkdir -p public/images/previews
-          mkdir -p public/images/full
-          mkdir -p public/images/screenshots
-          echo "✅ Struttura cartelle creata"
+        run: ./scripts/create-folder.sh
 
-      - name: Copy and update projects.json
-        run: |
-          echo "📁 Copiando e aggiornando projects.json..."
-          cp temp-monorepo/public/projects.json public/
+      - name: Copy projects.json
+        run: ./scripts/copy-projects.sh
 
-          # Aggiorna i link delle immagini per usare la CDN
-          echo "🔄 Aggiornando imageUrl per CDN..."
-          node -e "
-            const fs = require('fs');
-            const projects = JSON.parse(fs.readFileSync('public/projects.json', 'utf8'));
-
-            projects.forEach(project => {
-              // Estrai il nome del progetto dal path GitHub
-              const projectName = project.nameFolder;
-
-              // Aggiorna con il link della CDN
-              project.imageUrl = \`https://portfolio-cdn.netlify.app/images/previews/\${projectName}.webp\`;
-            });
-
-            fs.writeFileSync('public/projects.json', JSON.stringify(projects, null, 2));
-            console.log('✅ Link immagini aggiornati per CDN');
-          "
-
-          echo "✅ projects.json copiato e aggiornato"
+      - name: Update projects.json
+        run: ./scripts/update-projects.sh
 
       - name: Copy full images
-        run: |
-          echo "📸 Copiando immagini full size..."
-          find public/images/full/ -name "*.webp" -delete 2>/dev/null || true
-          cp temp-monorepo/screen-capture/full/*.webp public/images/full/ 2>/dev/null || echo "⚠️ Nessuna immagine full"
-          echo "✅ Immagini full copiate"
+        run: ./scripts/copy-full-images.sh
 
       - name: Copy preview images
-        run: |
-          echo "📸 Copiando immagini preview..."
-          find public/images/previews/ -name "*.webp" -delete 2>/dev/null || true
-          cp temp-monorepo/screen-capture/previews/*.webp public/images/previews/ 2>/dev/null || echo "⚠️ Nessuna immagine preview"
-          echo "✅ Immagini preview copiate"
+        run: ./scripts/copy-previews.sh
 
       - name: Copy screenshots
-        run: |
-          echo "📸 Copiando immagini screenshot..."
-          # Copia ricorsivamente tutta la cartella screenshots
-          cp -r temp-monorepo/screen-capture/screenshots/* public/images/screenshots/ 2>/dev/null || echo "⚠️ Nessuna immagine screenshot"
-          echo "✅ Immagini screenshot copiate"
+        run: ./scripts/copy-screenshots.sh
 
       - name: Check for changes
         id: check-changes
-        run: |
-          if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
-            echo "changes=false" >> $GITHUB_OUTPUT
-            echo "Nessun cambiamento rilevato"
-          else
-            echo "changes=true" >> $GITHUB_OUTPUT
-            echo "Cambiamenti rilevati, procedo con il commit"
-          fi
+        run: ./scripts/check-changes.sh
 
       - name: Commit and push changes
         if: steps.check-changes.outputs.changes == 'true'
-        run: |
-          git add public/projects.json
-          git add public/images/
-          git commit -m "🔄 Sync files from monorepo - $(date '+%Y-%m-%d %H:%M:%S')"
-          git push
+        run: ./scripts/commit-push.sh
 
       - name: Cleanup
         if: always()
