@@ -9,5 +9,3 @@ mkdir -p public/images/full
 mkdir -p public/images/screenshots
 
 echo "✅ Struttura cartelle creata"
-
-# $ chmod +x scripts/create-folder.sh
